@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.catalog.models;
 
+import com.malimaquintino.erp.commonmslib.dto.producttype.ProductTypeOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,4 +22,12 @@ public class ProductType extends AbstractEntity {
 
     @Column(name = "active", nullable = false)
     private Boolean active;
+
+    public ProductTypeOutputDto toOutputDto() {
+        return ProductTypeOutputDto.builder()
+                .id(getId())
+                .name(getName())
+                .active(getActive())
+                .build();
+    }
 }

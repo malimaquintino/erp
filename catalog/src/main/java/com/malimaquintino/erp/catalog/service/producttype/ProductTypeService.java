@@ -16,7 +16,7 @@ public interface ProductTypeService {
 
     CommonResponse<?> findById(long id);
 
-    ProductType findAuthorById(long id);
+    ProductType findProductTypeById(long id);
 
-    ProductType productTypeInputDtoToEntity(ProductTypeInputDto authorInputDto);
+    ProductType productTypeInputDtoToEntity(ProductTypeInputDto productTypeInputDto);
 }
