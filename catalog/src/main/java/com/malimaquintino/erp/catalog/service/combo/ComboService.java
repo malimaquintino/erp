@@ -7,9 +7,9 @@ import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 public interface ComboService {
     CommonResponse<?> create(ComboInputDto comboInputDto);
 
-    CommonResponse<?> update(Long id, ComboInputDto productInputDto);
+    CommonResponse<?> update(Long id, ComboInputDto comboInputDto);
 
-    Combo save(Combo productType);
+    Combo save(Combo combo);
 
     CommonResponse<?> findAll();
 
@@ -17,5 +17,5 @@ public interface ComboService {
 
     Combo findComboById(long id);
 
-    Combo comboInputDtoToEntity(ComboInputDto productInputDto);
+    Combo comboInputDtoToEntity(ComboInputDto comboInputDto);
 }

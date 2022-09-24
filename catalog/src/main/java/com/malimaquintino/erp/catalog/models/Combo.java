@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.catalog.models;
 
+import com.malimaquintino.erp.commonmslib.dto.combo.ComboOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,4 +31,13 @@ public class Combo extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> products;
+
+    public ComboOutputDto toOutputDto() {
+        return ComboOutputDto.builder()
+                .id(getId())
+                .name(getName())
+                .description(getDescription())
+                .products(products.stream().map(Product::toOutputDto).toList())
+                .build();
+    }
 }

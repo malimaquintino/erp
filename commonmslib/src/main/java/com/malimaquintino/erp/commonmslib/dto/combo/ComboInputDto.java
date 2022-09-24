@@ -1,10 +1,18 @@
 package com.malimaquintino.erp.commonmslib.dto.combo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ComboInputDto {
     @NotNull(message = "Combo name is required")
     @ApiModelProperty(notes = "Combo's name")

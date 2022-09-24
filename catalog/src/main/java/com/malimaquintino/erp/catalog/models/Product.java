@@ -1,6 +1,7 @@
 package com.malimaquintino.erp.catalog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.malimaquintino.erp.commonmslib.dto.product.ProductOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,4 +35,14 @@ public class Product extends AbstractEntity {
     @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private Set<Combo> combos = new HashSet<>();
+
+    public ProductOutputDto toOutputDto() {
+        return ProductOutputDto.builder()
+                .id(getId())
+                .name(getName())
+                .description(getDescription())
+                .price(getPrice())
+                .productType(getProductType().toOutputDto())
+                .build();
+    }
 }
