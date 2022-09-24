@@ -9,7 +9,7 @@ server:
 
 spring:
   application:
-    name: book-ms
+    name: catalog-ms
   datasource:
     url: jdbc:postgresql://${SQL_DATABASE_SERVER_HOST:localhost}:${SQL_DATABASE_SERVER_PORT:5432}/${SQL_DATABASE_NAME:erp}?currentSchema=catalog
     username: ${SQL_DATABASE_USERNAME:monitora}

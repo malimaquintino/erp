@@ -12,7 +12,7 @@ create table if not exists product (
 	id                  bigint not null,
 	name                varchar(255) not null,
 	description         text not null,
-	price               decimal not null,
+	price               float8 not null,
 	product_type_id     bigint not null,
     created_date        timestamp not null,
     updated_date        timestamp not null,

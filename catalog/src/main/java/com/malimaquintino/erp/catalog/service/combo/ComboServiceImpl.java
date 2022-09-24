@@ -2,18 +2,20 @@ package com.malimaquintino.erp.catalog.service.combo;
 
 import com.malimaquintino.erp.catalog.exceptions.ComboNotFoundException;
 import com.malimaquintino.erp.catalog.models.Combo;
-import com.malimaquintino.erp.catalog.repositories.ComboRepository;
+import com.malimaquintino.erp.catalog.repository.ComboRepository;
 import com.malimaquintino.erp.catalog.service.product.ProductService;
 import com.malimaquintino.erp.commonmslib.dto.combo.ComboInputDto;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import static com.malimaquintino.erp.catalog.responses.ComboResponse.*;
 import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.convertThrowableToCommonResponse;
 
+@Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ComboServiceImpl implements ComboService {
 
     private final ComboRepository comboRepository;

@@ -2,11 +2,11 @@ package com.malimaquintino.erp.catalog.service.product;
 
 import com.malimaquintino.erp.catalog.exceptions.ProductNotFoundException;
 import com.malimaquintino.erp.catalog.models.Product;
-import com.malimaquintino.erp.catalog.repositories.ProductRepository;
+import com.malimaquintino.erp.catalog.repository.ProductRepository;
 import com.malimaquintino.erp.catalog.service.producttype.ProductTypeService;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.commonmslib.dto.product.ProductInputDto;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import static com.malimaquintino.erp.catalog.responses.ProductResponse.*;
 import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.convertThrowableToCommonResponse;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
