@@ -1,6 +1,6 @@
 create table if not exists product_type (
 	id                  bigint not null,
-	name                varchar(255) unique not null,
+	name                varchar(255) not null,
 	active              boolean,
     created_date        timestamp not null,
     updated_date        timestamp not null,
