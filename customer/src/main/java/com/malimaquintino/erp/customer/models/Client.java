@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.malimaquintino.erp.commonmslib.dto.client.ClientOutputDto;
 import com.malimaquintino.erp.commonmslib.enums.PersonType;
 import lombok.*;
 
@@ -38,4 +39,15 @@ public class Client extends AbstractEntity {
 
     @OneToMany
     private Set<Contract> contracts = new HashSet<>();
+
+    public ClientOutputDto toOutputDto() {
+        return ClientOutputDto.builder()
+                .id(getId())
+                .name(getName())
+                .personType(getPersonType())
+                .document(getDocument())
+                .fantasyName(getFantasyName())
+                .birth(getBirth())
+                .build();
+    }
 }

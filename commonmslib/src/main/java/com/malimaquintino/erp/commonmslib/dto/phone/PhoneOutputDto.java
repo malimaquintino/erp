@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class PhoneOutputDto {
 
     @ApiModelProperty(notes = "Phone's id")
-    private String id;
+    private Long id;
 
     @ApiModelProperty(notes = "Phone's number")
     private String phoneNumber;

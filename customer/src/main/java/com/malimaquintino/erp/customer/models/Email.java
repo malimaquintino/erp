@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.malimaquintino.erp.commonmslib.dto.email.EmailOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,4 +25,12 @@ public class Email extends AbstractEntity {
 
     @Column(name = "observation")
     private String observation;
+
+    public EmailOutputDto toOutputDto() {
+        return EmailOutputDto.builder()
+                .id(getId())
+                .emailAddress(getEmailAddress())
+                .observation(getObservation())
+                .build();
+    }
 }

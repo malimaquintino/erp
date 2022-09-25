@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.malimaquintino.erp.commonmslib.dto.contract.ContractProductOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,4 +28,12 @@ public class ContractProduct extends AbstractEntity {
 
     @Column(name = "product_desc", nullable = false)
     private String productDesc;
+
+    public ContractProductOutputDto toOutputDto() {
+        return ContractProductOutputDto.builder()
+                .productId(getProductId())
+                .productName(getProductName())
+                .productDesc(getProductDesc())
+                .build();
+    }
 }

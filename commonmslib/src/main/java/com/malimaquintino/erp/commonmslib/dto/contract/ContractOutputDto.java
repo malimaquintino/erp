@@ -1,10 +1,9 @@
 package com.malimaquintino.erp.commonmslib.dto.contract;
 
-import com.malimaquintino.erp.commonmslib.dto.address.AddressInputDto;
-import com.malimaquintino.erp.commonmslib.dto.client.ClientInputDto;
-import com.malimaquintino.erp.commonmslib.dto.email.EmailInputDto;
-import com.malimaquintino.erp.commonmslib.dto.phone.PhoneInputDto;
-import com.malimaquintino.erp.commonmslib.dto.product.ProductOutputDto;
+import com.malimaquintino.erp.commonmslib.dto.address.AddressOutputDto;
+import com.malimaquintino.erp.commonmslib.dto.client.ClientOutputDto;
+import com.malimaquintino.erp.commonmslib.dto.email.EmailOutputDto;
+import com.malimaquintino.erp.commonmslib.dto.phone.PhoneOutputDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,17 +25,17 @@ public class ContractOutputDto {
     private Long id;
 
     @ApiModelProperty(notes = "Contract's client")
-    private ClientInputDto client;
+    private ClientOutputDto client;
 
     @ApiModelProperty(notes = "Contract's address")
-    private AddressInputDto address;
+    private AddressOutputDto address;
 
     @ApiModelProperty(notes = "Contract's emails")
-    private Set<EmailInputDto> emails = new HashSet<>();
+    private Set<EmailOutputDto> emails = new HashSet<>();
 
     @ApiModelProperty(notes = "Contract's phones")
-    private Set<PhoneInputDto> phones = new HashSet<>();
+    private Set<PhoneOutputDto> phones = new HashSet<>();
 
     @ApiModelProperty(notes = "Contract's products")
-    private List<ProductOutputDto> products = new ArrayList<>();
+    private Set<ContractProductOutputDto> products = new HashSet<>();
 }

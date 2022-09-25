@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.malimaquintino.erp.commonmslib.dto.address.AddressOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +37,17 @@ public class Address extends AbstractEntity {
 
     @Column(name = "complement")
     private String complement;
+
+    public AddressOutputDto toOutputDto() {
+        return AddressOutputDto.builder()
+                .id(getId())
+                .zipcode(getZipcode())
+                .street(getStreet())
+                .neighborhood(getNeighborhood())
+                .number(getNumber())
+                .city(getCity())
+                .state(getState())
+                .complement(getComplement())
+                .build();
+    }
 }
