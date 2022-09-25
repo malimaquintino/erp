@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.malimaquintino.erp.commonmslib.enums.PersonType;
 import lombok.*;
 
 import javax.persistence.*;

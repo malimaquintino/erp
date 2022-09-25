@@ -1,4 +1,4 @@
-package com.malimaquintino.erp.customer.models;
+package com.malimaquintino.erp.commonmslib.enums;
 
 public enum PersonType {
     PF("PF"),
