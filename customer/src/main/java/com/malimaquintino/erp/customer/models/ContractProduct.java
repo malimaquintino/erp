@@ -18,6 +18,7 @@ public class ContractProduct extends AbstractEntity {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
 
     @Column(name = "product_id", nullable = false)

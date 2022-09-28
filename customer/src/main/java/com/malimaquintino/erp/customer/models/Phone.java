@@ -19,6 +19,7 @@ public class Phone extends AbstractEntity {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
 
     @Column(name = "phone_number", nullable = false)

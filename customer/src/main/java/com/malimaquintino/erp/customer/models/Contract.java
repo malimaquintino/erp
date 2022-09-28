@@ -21,18 +21,19 @@ public class Contract extends AbstractEntity {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
     @OneToOne
     private Address address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<Email> emails = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<Phone> phones = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private Set<ContractProduct> products = new HashSet<>();
 
     public ContractOutputDto toOutputDto() {

@@ -23,7 +23,7 @@ create table if not exists client (
     created_date        timestamp not null,
     updated_date        timestamp not null,
 	constraint client_pkey primary key (id),
-	constraint client_person_type CHECK (person_type IN('PF', 'PJ')),
+	constraint client_person_type CHECK (person_type IN('PF', 'PJ'))
 );
 create sequence if not exists client_sequence start 1 increment 1;
 
@@ -40,7 +40,7 @@ create sequence if not exists contract_sequence start 1 increment 1;
 
 create table if not exists email (
 	id                  bigint not null,
-	contract_id         bigint not null
+	contract_id         bigint not null,
 	email_address       varchar(255) not null,
 	observation         text null,
     created_date        timestamp not null,
@@ -52,7 +52,7 @@ create sequence if not exists email_sequence start 1 increment 1;
 
 create table if not exists phone (
 	id                  bigint not null,
-	contract_id         bigint not null
+	contract_id         bigint not null,
 	phone_number        varchar(55) not null,
 	observation         text null,
     created_date        timestamp not null,

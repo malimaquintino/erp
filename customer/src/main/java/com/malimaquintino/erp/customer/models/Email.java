@@ -18,6 +18,7 @@ public class Email extends AbstractEntity {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "contract_id", nullable = false)
     private Contract contract;
 
     @Column(name = "email_address", nullable = false)

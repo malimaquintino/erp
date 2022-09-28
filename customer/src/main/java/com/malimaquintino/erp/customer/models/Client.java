@@ -37,7 +37,7 @@ public class Client extends AbstractEntity {
     @Column(name = "birth", nullable = false)
     private LocalDate birth;
 
-    @OneToMany
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private Set<Contract> contracts = new HashSet<>();
 
     public ClientOutputDto toOutputDto() {
