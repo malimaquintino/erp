@@ -3,6 +3,7 @@ package com.malimaquintino.erp.customer.service.address;
 import com.malimaquintino.erp.commonmslib.dto.address.AddressInputDto;
 import com.malimaquintino.erp.customer.exceptions.AddressNotFoundException;
 import com.malimaquintino.erp.customer.models.Address;
+import com.malimaquintino.erp.customer.models.Contract;
 import com.malimaquintino.erp.customer.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address addressInputDtoToEntity(AddressInputDto addressInputDto) {
+    public Address addressInputDtoToEntity(AddressInputDto addressInputDto, Contract contract) {
         return Address.builder()
                 .zipcode(addressInputDto.getZipcode())
                 .street(addressInputDto.getStreet())

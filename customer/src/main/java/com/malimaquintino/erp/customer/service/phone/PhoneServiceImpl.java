@@ -2,6 +2,7 @@ package com.malimaquintino.erp.customer.service.phone;
 
 import com.malimaquintino.erp.commonmslib.dto.phone.PhoneInputDto;
 import com.malimaquintino.erp.customer.exceptions.PhoneNotFoundException;
+import com.malimaquintino.erp.customer.models.Contract;
 import com.malimaquintino.erp.customer.models.Phone;
 import com.malimaquintino.erp.customer.repository.PhoneRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,9 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public Phone phoneInputDtoToEntity(PhoneInputDto phoneInputDto) {
+    public Phone phoneInputDtoToEntity(PhoneInputDto phoneInputDto, Contract contract) {
         return Phone.builder()
+                .contract(contract)
                 .phoneNumber(phoneInputDto.getPhoneNumber())
                 .observation(phoneInputDto.getObservation())
                 .build();

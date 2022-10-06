@@ -2,6 +2,7 @@ package com.malimaquintino.erp.customer.service.email;
 
 import com.malimaquintino.erp.commonmslib.dto.email.EmailInputDto;
 import com.malimaquintino.erp.customer.exceptions.EmailNotFoundException;
+import com.malimaquintino.erp.customer.models.Contract;
 import com.malimaquintino.erp.customer.models.Email;
 import com.malimaquintino.erp.customer.repository.EmailRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public Email emailInputDtoToEntity(EmailInputDto emailInputDto) {
+    public Email emailInputDtoToEntity(EmailInputDto emailInputDto, Contract contract) {
         return Email.builder()
+                .contract(contract)
                 .emailAddress(emailInputDto.getEmailAddress())
                 .observation(emailInputDto.getObservation())
                 .build();
