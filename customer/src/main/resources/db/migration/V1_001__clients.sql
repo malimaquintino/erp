@@ -15,7 +15,7 @@ create sequence if not exists address_sequence start 1 increment 1;
 
 create table if not exists client (
 	id                  bigint not null,
-	name                varchar(15) not null,
+	name                varchar(255) not null,
 	person_type         varchar(2) not null,
 	document            varchar(255) not null,
 	fantasy_name        varchar(10) null,
@@ -31,6 +31,7 @@ create table if not exists contract (
 	id                  bigint not null,
 	client_id           bigint not null,
 	address_id          bigint not null,
+	due_day             int not null,
     created_date        timestamp not null,
     updated_date        timestamp not null,
 	constraint contract_pkey primary key (id),

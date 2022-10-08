@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -41,4 +42,9 @@ public class ContractInputDto {
     @NotNull(message = "Contract products is required")
     @ApiModelProperty(notes = "Contract's products")
     private List<Long> products = new ArrayList<>();
+
+    @NotNull(message = "Contract due day is required")
+    @ApiModelProperty(notes = "Contract's due day")
+    @Range(min= 1, max= 30)
+    private Integer dueDay;
 }

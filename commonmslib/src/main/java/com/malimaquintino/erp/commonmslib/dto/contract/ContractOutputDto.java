@@ -36,4 +36,7 @@ public class ContractOutputDto {
 
     @ApiModelProperty(notes = "Contract's products")
     private Set<ContractProductOutputDto> products = new HashSet<>();
+
+    @ApiModelProperty(notes = "Contract's due day")
+    private Integer dueDay;
 }

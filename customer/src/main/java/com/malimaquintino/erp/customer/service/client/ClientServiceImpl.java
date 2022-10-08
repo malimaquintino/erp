@@ -30,6 +30,7 @@ public class ClientServiceImpl implements ClientService {
             var contracts = client.getContracts();
             contracts.add(contract);
             client.setContracts(contracts);
+            return client;
         }
         Set<Contract> contractHashSet = new HashSet<>();
         contractHashSet.add(contract);
