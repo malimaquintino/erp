@@ -17,7 +17,7 @@ create table if not exists client (
 	id                  bigint not null,
 	name                varchar(255) not null,
 	person_type         varchar(2) not null,
-	document            varchar(255) not null,
+	document            varchar(14) not null,
 	fantasy_name        varchar(10) null,
 	birth               date not null,
     created_date        timestamp not null,

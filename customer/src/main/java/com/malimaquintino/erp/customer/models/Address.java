@@ -1,6 +1,8 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.google.common.base.Strings;
 import com.malimaquintino.erp.commonmslib.dto.address.AddressOutputDto;
+import com.malimaquintino.erp.commonmslib.util.StringUtils;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,5 +51,13 @@ public class Address extends AbstractEntity {
                 .state(getState())
                 .complement(getComplement())
                 .build();
+    }
+
+    @PreUpdate
+    @PrePersist
+    private void prePersist() {
+        if (!Strings.isNullOrEmpty(getZipcode())) {
+            setZipcode(StringUtils.onlyNumbers(getZipcode()));
+        }
     }
 }

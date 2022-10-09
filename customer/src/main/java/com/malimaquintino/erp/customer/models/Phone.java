@@ -1,7 +1,8 @@
 package com.malimaquintino.erp.customer.models;
 
-import com.malimaquintino.erp.commonmslib.dto.email.EmailOutputDto;
+import com.google.common.base.Strings;
 import com.malimaquintino.erp.commonmslib.dto.phone.PhoneOutputDto;
+import com.malimaquintino.erp.commonmslib.util.StringUtils;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,11 +29,19 @@ public class Phone extends AbstractEntity {
     @Column(name = "observation")
     private String observation;
 
-    public PhoneOutputDto toOutputDto(){
+    public PhoneOutputDto toOutputDto() {
         return PhoneOutputDto.builder()
                 .id(getId())
                 .phoneNumber(getPhoneNumber())
                 .observation(getObservation())
                 .build();
+    }
+
+    @PreUpdate
+    @PrePersist
+    private void prePersist() {
+        if (!Strings.isNullOrEmpty(getPhoneNumber())) {
+            setPhoneNumber(StringUtils.onlyNumbers(getPhoneNumber()));
+        }
     }
 }

@@ -9,17 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.malimaquintino.erp</groupId>
-	<artifactId>customer</artifactId>
+	<artifactId>financial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customer</name>
-	<description>Customer ms</description>
+	<name>financial</name>
+	<description>Financial MS</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.4</spring-cloud.version>
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.malimaquintino.erp</groupId>
 			<artifactId>commonmslib</artifactId>

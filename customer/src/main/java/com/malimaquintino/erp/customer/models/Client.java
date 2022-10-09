@@ -1,7 +1,9 @@
 package com.malimaquintino.erp.customer.models;
 
+import com.google.common.base.Strings;
 import com.malimaquintino.erp.commonmslib.dto.client.ClientOutputDto;
 import com.malimaquintino.erp.commonmslib.enums.PersonType;
+import com.malimaquintino.erp.commonmslib.util.DocumentValidationUtils;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,5 +51,15 @@ public class Client extends AbstractEntity {
                 .fantasyName(getFantasyName())
                 .birth(getBirth())
                 .build();
+    }
+
+    @PreUpdate
+    @PrePersist
+    private void prePersist() {
+        var docValidation = new DocumentValidationUtils();
+
+        if (!Strings.isNullOrEmpty(getDocument())) {
+            setDocument(docValidation.cleanFormatting(getDocument()));
+        }
     }
 }
