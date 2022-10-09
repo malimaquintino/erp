@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.financial.models;
 
+import com.malimaquintino.erp.commonmslib.dto.bill.BillProductOutputDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,4 +35,15 @@ public class BillProduct extends AbstractEntity {
 
     @Column(name = "product_price", nullable = false)
     private Double productPrice;
+
+    public BillProductOutputDto toOutputDto() {
+        return BillProductOutputDto.builder()
+                .id(getId())
+                .productId(getProductId())
+                .productName(getProductName())
+                .productDescription(getProductDescription())
+                .productType(getProductType())
+                .productPrice(getProductPrice())
+                .build();
+    }
 }

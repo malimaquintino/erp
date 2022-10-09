@@ -1,6 +1,7 @@
 package com.malimaquintino.erp.financial.models;
 
 import com.google.common.base.Strings;
+import com.malimaquintino.erp.commonmslib.dto.bill.BillOutputDto;
 import com.malimaquintino.erp.commonmslib.util.DocumentValidationUtils;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -38,6 +40,18 @@ public class Bill extends AbstractEntity {
 
     @Column(name = "total", nullable = false)
     private Double total;
+
+    public BillOutputDto toOutputDto(){
+        return BillOutputDto.builder()
+                .id(getId())
+                .billProducts(getBillProductList().stream().map(BillProduct::toOutputDto).collect(Collectors.toSet()))
+                .customerId(getCustomerId())
+                .customerDocument(getCustomerDocument())
+                .customerName(getCustomerName())
+                .dueDate(getDueDate())
+                .total(getTotal())
+                .build();
+    }
 
     @PreUpdate
     @PrePersist

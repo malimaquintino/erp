@@ -1,6 +1,7 @@
 package com.malimaquintino.erp.customer.service.client;
 
 import com.malimaquintino.erp.commonmslib.dto.client.ClientInputDto;
+import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.customer.exceptions.ClientNotFoundException;
 import com.malimaquintino.erp.customer.models.Client;
 import com.malimaquintino.erp.customer.models.Contract;
@@ -8,8 +9,12 @@ import com.malimaquintino.erp.customer.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.convertThrowableToCommonResponse;
+import static com.malimaquintino.erp.customer.responses.ClientResponse.found;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +47,21 @@ public class ClientServiceImpl implements ClientService {
                 .fantasyName(clientInputDto.getFantasyName())
                 .birth(clientInputDto.getBirth())
                 .build();
+    }
+
+    @Override
+    public CommonResponse<?> findAll() {
+        // todo filter and pagination
+        try {
+            var clients = clientRepository.findAll();
+            return found(
+                    clients.stream()
+                            .sorted(Comparator.comparing(Client::getName))
+                            .map(Client::toOutputDto)
+                            .toList()
+            );
+        } catch (Exception e) {
+            return convertThrowableToCommonResponse(e);
+        }
     }
 }
