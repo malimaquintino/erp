@@ -1,0 +1,36 @@
+application:
+  title: Financial Worker MS - Worker to generate bills
+  version: 0.0.1-SNAPSHOT
+
+environment: ${ENVIRONMENT:local}
+
+server:
+  port: 8082
+
+spring:
+  application:
+    name: financial-worker
+  datasource:
+    url: jdbc:mysql://localhost:3306/financialworker
+    username: root
+    password: m@th3us
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    flyway:
+      enabled: true
+      schemas: user
+      baseline-on-migrate: true
+      baseline-version: "1_001"
+      ignore-future-migrations: false
+
+
