@@ -14,23 +14,7 @@ spring:
     url: jdbc:mysql://localhost:3306/financialworker
     username: root
     password: m@th3us
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
-    flyway:
-      enabled: true
-      schemas: user
-      baseline-on-migrate: true
-      baseline-version: "1_001"
-      ignore-future-migrations: false
-
-
+    driver-class-name=com: mysql.cj.jdbc.Driver
+  batch:
+    jdbc:
+      initialize-schema: always
