@@ -2,6 +2,7 @@ package com.malimaquintino.erp.customer.service.contract;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
+import com.malimaquintino.erp.commonmslib.dto.contract.ContractFilterInputDto;
 import com.malimaquintino.erp.commonmslib.dto.contract.ContractInputDto;
 import com.malimaquintino.erp.commonmslib.dto.product.ProductOutputDto;
 import com.malimaquintino.erp.customer.exceptions.ContractNotFoundException;
@@ -13,7 +14,11 @@ import com.malimaquintino.erp.customer.service.address.AddressService;
 import com.malimaquintino.erp.customer.service.client.ClientService;
 import com.malimaquintino.erp.customer.service.email.EmailService;
 import com.malimaquintino.erp.customer.service.phone.PhoneService;
+import com.malimaquintino.erp.customer.specification.ContractSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -65,14 +70,23 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public CommonResponse<?> findAll() {
-        // todo filter and pagination
+    public CommonResponse<?> findAll(ContractFilterInputDto inputDto, Pageable pageable) {
         try {
-            var savedContracts = contractRepository.findAll();
-            return found(savedContracts.stream().map(Contract::toOutputDto).toList());
+            var contracts = findByFilter(inputDto, pageable);
+            return found(contracts.stream().map(Contract::toOutputDto).toList());
         } catch (Exception e) {
             return convertThrowableToCommonResponse(e);
         }
+    }
+
+    @Override
+    public Page<Contract> findByFilter(ContractFilterInputDto findByFilter, Pageable pageable) {
+        Specification<Contract> specification = Specification
+                .where(ContractSpecification.idEquals(findByFilter.getContractId()))
+                .and(ContractSpecification.clientNameLike(findByFilter.getClientName()))
+                .and(ContractSpecification.clientDocumentLike(findByFilter.getClientDocument()))
+                .and(ContractSpecification.dueDayEquals(findByFilter.getDueDay()));
+        return contractRepository.findAll(specification, pageable);
     }
 
     @Override
