@@ -18,13 +18,9 @@ public class InvoicingJob {
     private final JobBuilderFactory jobBuilderFactory;
 
     @Bean
-    public Job createInvoice(
-            @Qualifier("testOne") Step testOne,
-            @Qualifier("testTwo") Step testTwo
-    ) {
+    public Job createInvoice(@Qualifier("createBill") Step createBill) {
         return jobBuilderFactory.get("createInvoice")
-                .start(testOne)
-                .next(testTwo)
+                .start(createBill)
                 .incrementer(new RunIdIncrementer())
                 .build();
     }

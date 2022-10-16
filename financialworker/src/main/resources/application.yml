@@ -11,10 +11,17 @@ spring:
   application:
     name: financial-worker
   datasource:
-    url: jdbc:mysql://localhost:3306/financialworker
+    jdbc-url: jdbc:mysql://localhost:3306/financialworker
     username: root
     password: m@th3us
-    driver-class-name=com: mysql.cj.jdbc.Driver
+#    driverClassName: mysql.cj.jdbc.Driver
   batch:
     jdbc:
       initialize-schema: always
+
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/erp?currentSchema=customer
+    username: monitora
+    password: monitora
+#    driverClassName: org.postgresql.Driver
