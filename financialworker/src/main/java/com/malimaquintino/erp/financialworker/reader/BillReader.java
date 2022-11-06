@@ -35,7 +35,7 @@ public class BillReader {
     @Bean
     public SqlPagingQueryProviderFactoryBean queryProviderCreateBill(@Qualifier("appDataSource") DataSource dataSource) {
         SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
-        Integer dueDay = nowPlusDays(10).getDayOfMonth();
+        Integer dueDay = 5; //nowPlusDays(10).getDayOfMonth();
 
         log.info("Bill customers of the day {}", dueDay);
 
@@ -47,7 +47,7 @@ public class BillReader {
                 "c2.name as customerName, " +
                 "c2.document as customerDocument, " +
                 "c.due_day as dueDay, " +
-                "100.99 as total");
+                "c.total as total");
         queryProvider.setFromClause("from customer.contract c " +
                 "join customer.client c2 on c.client_id = c2.id");
         queryProvider.setWhereClause("where due_day = " + dueDay);

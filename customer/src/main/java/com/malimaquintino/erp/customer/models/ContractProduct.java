@@ -30,11 +30,15 @@ public class ContractProduct extends AbstractEntity {
     @Column(name = "product_desc", nullable = false)
     private String productDesc;
 
+    @Column(name = "value", nullable = false)
+    private Double value;
+
     public ContractProductOutputDto toOutputDto() {
         return ContractProductOutputDto.builder()
                 .productId(getProductId())
                 .productName(getProductName())
                 .productDesc(getProductDesc())
+                .value(getValue())
                 .build();
     }
 }

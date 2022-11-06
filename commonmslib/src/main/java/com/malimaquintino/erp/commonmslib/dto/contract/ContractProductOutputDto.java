@@ -19,4 +19,7 @@ public class ContractProductOutputDto {
 
     @ApiModelProperty(notes = "Contract product's description")
     private String productDesc;
+
+    @ApiModelProperty(notes = "Contract product's value")
+    private Double value;
 }

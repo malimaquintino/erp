@@ -39,4 +39,7 @@ public class ContractOutputDto {
 
     @ApiModelProperty(notes = "Contract's due day")
     private Integer dueDay;
+
+    @ApiModelProperty(notes = "Contract's total")
+    private Double total;
 }

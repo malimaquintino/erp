@@ -39,6 +39,9 @@ public class Contract extends AbstractEntity {
     @Column(name = "due_day", nullable = false)
     private Integer dueDay;
 
+    @Column(name = "total", nullable = false)
+    private Double total;
+
     public ContractOutputDto toOutputDto() {
         return ContractOutputDto.builder()
                 .id(getId())
@@ -48,6 +51,7 @@ public class Contract extends AbstractEntity {
                 .phones(getPhones().stream().map(Phone::toOutputDto).collect(Collectors.toSet()))
                 .products(getProducts().stream().map(ContractProduct::toOutputDto).collect(Collectors.toSet()))
                 .dueDay(getDueDay())
+                .total(getTotal())
                 .build();
     }
 }

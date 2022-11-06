@@ -116,6 +116,7 @@ public class ContractServiceImpl implements ContractService {
         contract.setPhones(contractInputDto.getPhones().stream().map(phone -> phoneService.phoneInputDtoToEntity(phone, contract)).collect(Collectors.toSet()));
         contract.setProducts(products);
         contract.setDueDay(contractInputDto.getDueDay());
+        contract.setTotal(products.stream().mapToDouble(ContractProduct::getValue).sum());
         return contract;
     }
 
@@ -128,6 +129,7 @@ public class ContractServiceImpl implements ContractService {
                 .productId(productOutputDto.getId())
                 .productName(productOutputDto.getName())
                 .productDesc(productOutputDto.getDescription())
+                .value(productOutputDto.getPrice())
                 .build();
     }
 }
