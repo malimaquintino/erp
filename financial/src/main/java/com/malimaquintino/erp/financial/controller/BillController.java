@@ -1,6 +1,7 @@
 package com.malimaquintino.erp.financial.controller;
 
 import com.malimaquintino.erp.commonmslib.dto.bill.BillInputDto;
+import com.malimaquintino.erp.commonmslib.dto.bill.BillInputDtoV2;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.financial.services.bill.BillService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,13 @@ public class BillController {
     public ResponseEntity<?> create(@Valid @RequestBody BillInputDto inputDto) {
         log.info("Creating new bill {}", inputDto);
         CommonResponse<?> commonResponse = billService.createCustomerBill(inputDto);
+        return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
+    }
+
+    @PostMapping(value = "/from-worker" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createFromWorker(@Valid @RequestBody BillInputDtoV2 inputDto) {
+        log.info("Creating new bill {}", inputDto);
+        CommonResponse<?> commonResponse = billService.createCustomerBillFromWorker(inputDto);
         return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
     }
 }

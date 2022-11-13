@@ -23,4 +23,6 @@ public interface ContractService {
     Contract findContractById(long id);
 
     Contract contractInputDtoToEntity(ContractInputDto contractInputDto);
+
+    CommonResponse<?> findContractProducts(long id);
 }

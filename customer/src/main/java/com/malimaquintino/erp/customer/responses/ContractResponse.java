@@ -3,6 +3,7 @@ package com.malimaquintino.erp.customer.responses;
 import com.malimaquintino.erp.commonmslib.constant.HttpStatusConstants;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.commonmslib.dto.contract.ContractOutputDto;
+import com.malimaquintino.erp.commonmslib.dto.contract.ContractProductOutputDto;
 import lombok.experimental.UtilityClass;
 
 import java.time.LocalDateTime;
@@ -50,6 +51,17 @@ public class ContractResponse {
                 .status(HttpStatusConstants.HttpOK.CODE)
                 .message(HttpStatusConstants.HttpOK.DESCRIPTION)
                 .detailMessage("Found contract " + outputDto.getId())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    public static CommonResponse<?> foundProducts(List<ContractProductOutputDto> outputDto) {
+        return CommonResponse.builder()
+                .result(outputDto)
+                .error(Boolean.FALSE)
+                .status(HttpStatusConstants.HttpOK.CODE)
+                .message(HttpStatusConstants.HttpOK.DESCRIPTION)
+                .detailMessage("Found contract products")
                 .timestamp(LocalDateTime.now())
                 .build();
     }

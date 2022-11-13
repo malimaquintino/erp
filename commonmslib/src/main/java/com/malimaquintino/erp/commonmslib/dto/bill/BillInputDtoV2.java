@@ -33,7 +33,7 @@ public class BillInputDtoV2 {
 
     @NotNull(message = "Bill's due date is required")
     @ApiModelProperty(notes = "Bill's due date")
-    private LocalDate dueDate;
+    private Integer dueDay;
 
     @NotNull(message = "Bill's total is required")
     @ApiModelProperty(notes = "Bill's total")

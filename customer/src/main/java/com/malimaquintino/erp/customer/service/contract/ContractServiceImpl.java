@@ -28,8 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.convertThrowableToCommonResponse;
-import static com.malimaquintino.erp.customer.responses.ContractResponse.created;
-import static com.malimaquintino.erp.customer.responses.ContractResponse.found;
+import static com.malimaquintino.erp.customer.responses.ContractResponse.*;
 
 @Service
 @RequiredArgsConstructor
@@ -118,6 +117,17 @@ public class ContractServiceImpl implements ContractService {
         contract.setDueDay(contractInputDto.getDueDay());
         contract.setTotal(products.stream().mapToDouble(ContractProduct::getValue).sum());
         return contract;
+    }
+
+    @Override
+    public CommonResponse<?> findContractProducts(long id) {
+
+        try {
+            Contract contract = findContractById(id);
+            return foundProducts(contract.getProducts().stream().map(ContractProduct::toOutputDto).toList());
+        } catch (Exception e) {
+            return convertThrowableToCommonResponse(e);
+        }
     }
 
     private ContractProduct toContractProduct(ResponseEntity<?> response, Contract contract) {

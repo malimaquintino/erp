@@ -52,4 +52,11 @@ public class ContractController {
         CommonResponse<?> commonResponse = contractService.findById(id);
         return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
     }
+
+    @GetMapping(path = "/{id}/products", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findContractProducts(@PathVariable long id) {
+        log.info("Finding contract products {}", id);
+        CommonResponse<?> commonResponse = contractService.findContractProducts(id);
+        return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
+    }
 }
