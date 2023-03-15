@@ -12,8 +12,8 @@ spring:
     name: financial-ms
   datasource:
     url: jdbc:postgresql://${SQL_DATABASE_SERVER_HOST:localhost}:${SQL_DATABASE_SERVER_PORT:5432}/${SQL_DATABASE_NAME:erp}?currentSchema=financial
-    username: ${SQL_DATABASE_USERNAME:monitora}
-    password: ${SQL_DATABASE_PASSWORD:monitora}
+    username: ${SQL_DATABASE_USERNAME:postgres}
+    password: ${SQL_DATABASE_PASSWORD:mypass}
   jpa:
     hibernate:
       ddl-auto: validate
