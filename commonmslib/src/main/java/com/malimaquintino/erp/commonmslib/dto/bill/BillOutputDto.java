@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.commonmslib.dto.bill;
 
+import com.malimaquintino.erp.commonmslib.enums.BillStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,4 +36,7 @@ public class BillOutputDto {
 
     @ApiModelProperty(notes = "Bill's total")
     private Double total;
+
+    @ApiModelProperty(notes = "Bill's status")
+    private BillStatus status;
 }

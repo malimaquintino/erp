@@ -18,7 +18,7 @@ import static com.malimaquintino.erp.fakergenerator.mocks.CatalogMock.getProduct
 public class CatalogService {
     private final CatalogRequest catalogRequest;
 
-//    @Bean
+    @Bean
     private void generateFaker() {
         generateTypes();
         generateProduct();

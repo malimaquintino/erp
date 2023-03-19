@@ -36,7 +36,7 @@ public class BillReader {
     public SqlPagingQueryProviderFactoryBean queryProviderCreateBill(@Qualifier("appDataSource") DataSource dataSource) {
         SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
         Integer dueDay = nowPlusDays(10).getDayOfMonth();
-        dueDay = 5;
+        dueDay = 25;
         log.info("Bill customers of the day {}", dueDay);
 
         queryProvider.setDataSource(dataSource);
