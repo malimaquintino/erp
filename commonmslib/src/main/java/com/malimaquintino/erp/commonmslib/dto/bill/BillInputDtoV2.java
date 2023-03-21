@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.commonmslib.dto.bill;
 
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +39,8 @@ public class BillInputDtoV2 {
     @NotNull(message = "Bill's total is required")
     @ApiModelProperty(notes = "Bill's total")
     private Double total;
+
+    @NotNull(message = "Bill's payment method is required")
+    @ApiModelProperty(notes = "Bill's payment method")
+    private BillPaymentMethod paymentMethod;
 }

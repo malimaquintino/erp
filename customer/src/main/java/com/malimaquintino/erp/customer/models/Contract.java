@@ -1,6 +1,7 @@
 package com.malimaquintino.erp.customer.models;
 
 import com.malimaquintino.erp.commonmslib.dto.contract.ContractOutputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,6 +43,10 @@ public class Contract extends AbstractEntity {
     @Column(name = "total", nullable = false)
     private Double total;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method", nullable = false)
+    private BillPaymentMethod paymentMethod;
+
     public ContractOutputDto toOutputDto() {
         return ContractOutputDto.builder()
                 .id(getId())
@@ -52,6 +57,7 @@ public class Contract extends AbstractEntity {
                 .products(getProducts().stream().map(ContractProduct::toOutputDto).collect(Collectors.toSet()))
                 .dueDay(getDueDay())
                 .total(getTotal())
+                .paymentMethod(getPaymentMethod())
                 .build();
     }
 }

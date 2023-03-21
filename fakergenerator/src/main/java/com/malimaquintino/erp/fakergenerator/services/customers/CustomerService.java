@@ -33,6 +33,7 @@ public class CustomerService {
                     .phones(new HashSet<>(Collections.singletonList(getPhone())))
                     .dueDay(randomDueDay())
                     .products(randomProductList())
+                    .paymentMethod(randomPaymentMethod())
                     .build()
             );
         }

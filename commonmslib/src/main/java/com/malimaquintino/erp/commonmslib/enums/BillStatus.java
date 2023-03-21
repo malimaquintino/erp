@@ -2,7 +2,7 @@ package com.malimaquintino.erp.commonmslib.enums;
 
 public enum BillStatus {
     OPEN("OPEN"),
-    PAYED("PAYED"),
+    PAID("PAID"),
     CANCELED("CANCELED");
 
     private final String status;

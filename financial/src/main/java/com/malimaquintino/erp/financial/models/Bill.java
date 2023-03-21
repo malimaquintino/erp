@@ -2,6 +2,7 @@ package com.malimaquintino.erp.financial.models;
 
 import com.google.common.base.Strings;
 import com.malimaquintino.erp.commonmslib.dto.bill.BillOutputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import com.malimaquintino.erp.commonmslib.enums.BillStatus;
 import com.malimaquintino.erp.commonmslib.util.DocumentValidationUtils;
 import lombok.*;
@@ -46,6 +47,10 @@ public class Bill extends AbstractEntity {
     @Column(name = "status", nullable = false)
     private BillStatus status = BillStatus.OPEN;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method", nullable = false)
+    private BillPaymentMethod paymentMethod;
+
     public BillOutputDto toOutputDto(){
         return BillOutputDto.builder()
                 .id(getId())
@@ -56,6 +61,7 @@ public class Bill extends AbstractEntity {
                 .dueDate(getDueDate())
                 .total(getTotal())
                 .status(getStatus())
+                .paymentMethod(getPaymentMethod())
                 .build();
     }
 

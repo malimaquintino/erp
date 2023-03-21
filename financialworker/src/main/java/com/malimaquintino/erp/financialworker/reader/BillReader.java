@@ -47,7 +47,8 @@ public class BillReader {
                 "c2.name as customerName, " +
                 "c2.document as customerDocument, " +
                 "c.due_day as dueDay, " +
-                "c.total as total");
+                "c.total as total, " +
+                "c.payment_method as paymentMethod ");
         queryProvider.setFromClause("from customer.contract c " +
                 "join customer.client c2 on c.client_id = c2.id");
         queryProvider.setWhereClause("where due_day = " + dueDay);

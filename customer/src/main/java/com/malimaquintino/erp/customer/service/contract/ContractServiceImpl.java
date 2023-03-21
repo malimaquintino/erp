@@ -115,6 +115,7 @@ public class ContractServiceImpl implements ContractService {
         contract.setPhones(contractInputDto.getPhones().stream().map(phone -> phoneService.phoneInputDtoToEntity(phone, contract)).collect(Collectors.toSet()));
         contract.setProducts(products);
         contract.setDueDay(contractInputDto.getDueDay());
+        contract.setPaymentMethod(contractInputDto.getPaymentMethod());
         contract.setTotal(products.stream().mapToDouble(ContractProduct::getValue).sum());
         return contract;
     }

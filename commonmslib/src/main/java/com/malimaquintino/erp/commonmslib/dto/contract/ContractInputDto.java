@@ -4,6 +4,7 @@ import com.malimaquintino.erp.commonmslib.dto.address.AddressInputDto;
 import com.malimaquintino.erp.commonmslib.dto.client.ClientInputDto;
 import com.malimaquintino.erp.commonmslib.dto.email.EmailInputDto;
 import com.malimaquintino.erp.commonmslib.dto.phone.PhoneInputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,4 +48,8 @@ public class ContractInputDto {
     @ApiModelProperty(notes = "Contract's due day")
     @Range(min= 1, max= 30)
     private Integer dueDay;
+
+    @NotNull(message = "Contract bill's payment method is required")
+    @ApiModelProperty(notes = "Contract bill's payment method")
+    private BillPaymentMethod paymentMethod;
 }

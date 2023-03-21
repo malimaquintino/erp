@@ -6,6 +6,7 @@ import com.malimaquintino.erp.commonmslib.dto.bill.BillInputDtoV2;
 import com.malimaquintino.erp.commonmslib.dto.bill.BillProductInputDto;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.commonmslib.dto.contract.ContractProductOutputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillStatus;
 import com.malimaquintino.erp.financial.models.Bill;
 import com.malimaquintino.erp.financial.models.BillProduct;
 import com.malimaquintino.erp.financial.repository.BillRepository;
@@ -54,6 +55,8 @@ public class BillServiceImpl implements BillService {
                 .customerId(inputDto.getCustomerId())
                 .customerName(inputDto.getCustomerName())
                 .customerDocument(inputDto.getCustomerDocument())
+                .status(BillStatus.OPEN)
+                .paymentMethod(inputDto.getPaymentMethod())
                 .build();
         bill.setBillProductList(inputDto.getBillProducts().stream()
                 .map(prodInputDto -> billProductToEntity(prodInputDto, bill))
@@ -77,6 +80,7 @@ public class BillServiceImpl implements BillService {
                     .customerName(inputDto.getCustomerName())
                     .dueDate(nextDateFromDay(inputDto.getDueDay()))
                     .total(inputDto.getTotal())
+                    .paymentMethod(inputDto.getPaymentMethod())
                     .build();
 
             var bill = save(billInputDtoToEntity(billInputDto));

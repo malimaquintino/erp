@@ -4,6 +4,7 @@ import com.malimaquintino.erp.commonmslib.dto.address.AddressOutputDto;
 import com.malimaquintino.erp.commonmslib.dto.client.ClientOutputDto;
 import com.malimaquintino.erp.commonmslib.dto.email.EmailOutputDto;
 import com.malimaquintino.erp.commonmslib.dto.phone.PhoneOutputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,4 +43,7 @@ public class ContractOutputDto {
 
     @ApiModelProperty(notes = "Contract's total")
     private Double total;
+
+    @ApiModelProperty(notes = "Contract Bill's BillPayment method")
+    private BillPaymentMethod paymentMethod;
 }

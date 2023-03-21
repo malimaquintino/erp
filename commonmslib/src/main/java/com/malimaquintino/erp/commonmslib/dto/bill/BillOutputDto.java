@@ -1,5 +1,6 @@
 package com.malimaquintino.erp.commonmslib.dto.bill;
 
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import com.malimaquintino.erp.commonmslib.enums.BillStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -39,4 +40,7 @@ public class BillOutputDto {
 
     @ApiModelProperty(notes = "Bill's status")
     private BillStatus status;
+
+    @ApiModelProperty(notes = "Bill's BillPayment method")
+    private BillPaymentMethod paymentMethod;
 }

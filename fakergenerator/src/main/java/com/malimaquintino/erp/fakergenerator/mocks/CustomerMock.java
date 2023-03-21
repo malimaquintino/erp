@@ -5,6 +5,7 @@ import com.malimaquintino.erp.commonmslib.dto.address.AddressInputDto;
 import com.malimaquintino.erp.commonmslib.dto.client.ClientInputDto;
 import com.malimaquintino.erp.commonmslib.dto.email.EmailInputDto;
 import com.malimaquintino.erp.commonmslib.dto.phone.PhoneInputDto;
+import com.malimaquintino.erp.commonmslib.enums.BillPaymentMethod;
 import com.malimaquintino.erp.commonmslib.enums.PersonType;
 import lombok.experimental.UtilityClass;
 
@@ -81,5 +82,11 @@ public class CustomerMock {
                 .phoneNumber(faker.phoneNumber().phoneNumber())
                 .observation("")
                 .build();
+    }
+
+    public static BillPaymentMethod randomPaymentMethod() {
+        String[] methods = {"MONEY", "BANK_SLIP", "PIX", "CREDIT_CARD", "DEBIT_CARD"};
+        SecureRandom rand = new SecureRandom();
+        return BillPaymentMethod.valueOf(methods[rand.nextInt(methods.length)]);
     }
 }
