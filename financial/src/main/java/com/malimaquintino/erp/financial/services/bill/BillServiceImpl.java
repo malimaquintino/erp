@@ -7,6 +7,7 @@ import com.malimaquintino.erp.commonmslib.dto.bill.BillProductInputDto;
 import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.commonmslib.dto.contract.ContractProductOutputDto;
 import com.malimaquintino.erp.commonmslib.enums.BillStatus;
+import com.malimaquintino.erp.financial.exceptions.BillAlreadyExistsException;
 import com.malimaquintino.erp.financial.models.Bill;
 import com.malimaquintino.erp.financial.models.BillProduct;
 import com.malimaquintino.erp.financial.repository.BillRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.convertThrowableToCommonResponse;
@@ -35,6 +37,14 @@ public class BillServiceImpl implements BillService {
     @Override
     public CommonResponse<?> createCustomerBill(BillInputDto billInputDto) {
         try {
+            var savedBill = billRepository
+                    .findByCustomerDocumentAndDueDate(billInputDto.getCustomerDocument(), billInputDto.getDueDate())
+                    .orElse(null);
+
+            if (Objects.nonNull(savedBill)) {
+                return convertThrowableToCommonResponse(new BillAlreadyExistsException());
+            }
+
             var bill = save(billInputDtoToEntity(billInputDto));
             return created(bill.toOutputDto());
         } catch (Exception e) {
