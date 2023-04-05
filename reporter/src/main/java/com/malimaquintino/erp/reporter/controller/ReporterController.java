@@ -25,7 +25,7 @@ public class ReporterController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@Valid @RequestBody ReportInputDto inputDto) {
         log.info("Creating new report {}", inputDto);
-        freeQueryService.executeQuery();
+        freeQueryService.executeQuery(inputDto);
         CommonResponse<?> commonResponse = new CommonResponse();
         return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
     }
