@@ -28,7 +28,7 @@ public class FreeQueryServiceImpl implements FreeQueryService {
         try {
             validateQuery(inputDto.getQuery());
             Query query = entityManager.createNativeQuery(inputDto.getQuery());
-            List<String> fields = getSelectedFields(inputDto.getQuery());
+            List<String> fields = getSelectedFields(cleanQuery(inputDto.getQuery()));
             List result = getResult(fields, query.getResultList());
             return ReportResponse.found(result);
 
@@ -50,6 +50,13 @@ public class FreeQueryServiceImpl implements FreeQueryService {
         return listResult;
     }
 
+    /**
+     * VALIDATE IF QUERY IS IN ALLOWED FORMAT
+     * > UNABLE TO PERFORM SELECT * FROM, MUST EXPLICIT THE SELECTED FIELDS
+     *
+     * @param query
+     * @return
+     */
     private boolean validateQuery(String query) {
         String selectedFields = extractSelectedFields(query);
         if ("*".equalsIgnoreCase(selectedFields)) {
@@ -58,12 +65,31 @@ public class FreeQueryServiceImpl implements FreeQueryService {
         return Boolean.TRUE;
     }
 
+    /**
+     * TRANSFORM ALL STRING FIELDS IN ARRAY
+     *
+     * @param query
+     * @return
+     */
     private List<String> getSelectedFields(String query) {
+        List<String> fields = new ArrayList<>();
         String selectedFields = extractSelectedFields(query);
         List<String> items = Arrays.asList(selectedFields.split("\\s*,\\s*"));
-        return items;
+
+        /* CHECK IF EACH FIELD HAS ALIAS */
+        items.forEach(field -> {
+            fields.add(getFieldAlias(field));
+        });
+
+        return fields;
     }
 
+    /**
+     * GET AL FIELDS BETWEEN THE WORDS SELECT AND FROM
+     *
+     * @param query
+     * @return
+     */
     private String extractSelectedFields(String query) {
         Pattern r = Pattern.compile("SELECT(.*)FROM", Pattern.CASE_INSENSITIVE);
         Matcher m = r.matcher(query.trim());
@@ -75,5 +101,31 @@ public class FreeQueryServiceImpl implements FreeQueryService {
             throw new BadFormatQueryException();
         }
         return selectFields;
+    }
+
+    /**
+     * CHECK IF SELECTED HAS ALIAS, IF HAS RETURN THE ALIAS IF NOT RETURN ORIGINAL TEXT
+     *
+     * @param field
+     * @return
+     */
+    private String getFieldAlias(String field) {
+        String pattern = "\\s(.*)";
+        if (field.toLowerCase().contains("as")) {
+            pattern = "AS (.*)";
+        }
+        Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+        Matcher m = r.matcher(field.trim());
+        String alias = field;
+
+        if (m.find()) {
+            alias = m.group(1).trim();
+        }
+        return alias;
+    }
+
+    private String cleanQuery(String query) {
+        query = query.replace("\"", "");
+        return query.trim();
     }
 }
