@@ -23,9 +23,16 @@ public class ReporterController {
     private final FreeQueryService freeQueryService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@Valid @RequestBody ReportInputDto inputDto) {
+    public ResponseEntity<?> executeQuery(@Valid @RequestBody ReportInputDto inputDto) {
         log.info("Creating new report {}", inputDto);
-        CommonResponse<?> commonResponse = freeQueryService.executeQuery(inputDto);
+        CommonResponse<?> commonResponse = freeQueryService.getQueryData(inputDto);
+        return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
+    }
+
+    @PostMapping(value = "/file", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> generateFile(@Valid @RequestBody ReportInputDto inputDto) {
+        log.info("Creating new report {}", inputDto);
+        CommonResponse<?> commonResponse = freeQueryService.generateFile(inputDto);
         return ResponseEntity.status(commonResponse.getStatus()).body(commonResponse);
     }
 

@@ -20,4 +20,15 @@ public class ReportResponse {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
+
+    public static CommonResponse<?> fileGenerate(String output){
+        return CommonResponse.builder()
+                .result(output)
+                .error(Boolean.FALSE)
+                .status(HttpStatusConstants.HttpOK.CODE)
+                .message(HttpStatusConstants.HttpOK.DESCRIPTION)
+                .detailMessage("Generated report file successfully")
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 }

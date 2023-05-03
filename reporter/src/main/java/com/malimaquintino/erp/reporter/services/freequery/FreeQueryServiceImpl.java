@@ -4,6 +4,8 @@ import com.malimaquintino.erp.commonmslib.dto.common.CommonResponse;
 import com.malimaquintino.erp.commonmslib.dto.report.ReportInputDto;
 import com.malimaquintino.erp.reporter.exceptions.BadFormatQueryException;
 import com.malimaquintino.erp.reporter.responses.ReportResponse;
+import com.malimaquintino.erp.reporter.services.csvexport.CsvExportService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -18,23 +20,39 @@ import static com.malimaquintino.erp.commonmslib.dto.common.CommonResponse.conve
 
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class FreeQueryServiceImpl implements FreeQueryService {
+
+    private final CsvExportService csvExportService;
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public CommonResponse<?> executeQuery(ReportInputDto inputDto) {
+    public CommonResponse<?> getQueryData(ReportInputDto inputDto) {
         try {
-            validateQuery(inputDto.getQuery());
-            Query query = entityManager.createNativeQuery(inputDto.getQuery());
-            List<String> fields = getSelectedFields(cleanQuery(inputDto.getQuery()));
-            List result = getResult(fields, query.getResultList());
-            return ReportResponse.found(result);
-
+            return ReportResponse.found(executeQuery(inputDto));
         } catch (Exception e) {
             return convertThrowableToCommonResponse(e);
         }
+    }
+
+    @Override
+    public CommonResponse<?> generateFile(ReportInputDto inputDto) {
+        try {
+            List<Map<String, String>> data = executeQuery(inputDto);
+            String filePath = csvExportService.generateFile(data);
+            return ReportResponse.fileGenerate(filePath);
+        } catch (Exception e) {
+            return convertThrowableToCommonResponse(e);
+        }
+    }
+
+    private List<Map<String, String>> executeQuery(ReportInputDto inputDto) {
+        validateQuery(inputDto.getQuery());
+        Query query = entityManager.createNativeQuery(inputDto.getQuery());
+        List<String> fields = getSelectedFields(cleanQuery(inputDto.getQuery()));
+        return getResult(fields, query.getResultList());
     }
 
     private List<Map<String, String>> getResult(List<String> fields, List<Object[]> queryResult) {

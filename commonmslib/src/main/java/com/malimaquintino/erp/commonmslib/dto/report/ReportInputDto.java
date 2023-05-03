@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ReportInputDto {
-    private boolean file;
     private String query;
 }

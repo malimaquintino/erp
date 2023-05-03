@@ -5,5 +5,7 @@ import com.malimaquintino.erp.commonmslib.dto.report.ReportInputDto;
 
 public interface FreeQueryService {
 
-    CommonResponse<?> executeQuery(ReportInputDto inputDto);
+    CommonResponse<?> getQueryData(ReportInputDto inputDto);
+
+    CommonResponse<?> generateFile(ReportInputDto inputDto);
 }
