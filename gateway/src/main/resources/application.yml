@@ -8,6 +8,8 @@ server:
   port: 8081
 
 spring:
+  main:
+    web-application-type: reactive
   application:
     name: gateway-ms
   cloud:
